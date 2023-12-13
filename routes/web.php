@@ -2,7 +2,14 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CheckoutController;
+use App\Http\Controllers\CustomerAuthController;
+use App\Http\Controllers\CustomerOrderController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\MyCommerceController;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\SubCategoryController;
+use App\Http\Controllers\UnitController;
 
 /*
 |--------------------------------------------------------------------------
@@ -51,7 +58,13 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
     Route::get('/sub-category/delete/{id}', [SubCategoryController::class, 'delete'])->name('sub-category.delete');
     Route::get('/sub-category/edit/{id}', [SubCategoryController::class, 'edit'])->name('sub-category.edit');
     Route::post('/sub-category/update/{id}', [SubCategoryController::class, 'update'])->name('sub-category.update');
-
+    
+    Route::get('/brand/add', [BrandController::class, 'index'])->name('brand.add');
+    Route::get('/brand/manage', [BrandController::class, 'manage'])->name('brand.manage');
+    Route::post('/brand/new', [BrandController::class, 'create'])->name('brand.new');
+    Route::get('/brand/delete/{id}', [BrandController::class, 'delete'])->name('brand.delete');
+    Route::get('/brand/edit/{id}', [BrandController::class, 'edit'])->name('brand.edit');
+    Route::post('/brand/update/{id}', [BrandController::class, 'update'])->name('brand.update');
     
 });
 
