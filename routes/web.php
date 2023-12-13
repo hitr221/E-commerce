@@ -1,6 +1,9 @@
 <?php
 
+use App\Http\Controllers\AdminOrderController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\BrandController;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\CustomerAuthController;
@@ -38,6 +41,21 @@ Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout');
 Route::get('/customer-email-check', [CheckoutController::class, 'checkCustomerEmail'])->name('customer-email-check');
 Route::post('/new-cash-order', [CheckoutController::class, 'newCashOrder'])->name('new-cash-order');
 Route::get('/complete-order', [CheckoutController::class, 'completeOrder'])->name('complete-order');
+
+Route::get('/customer-login', [CustomerAuthController::class, 'index'])->name('customer.login');
+Route::post('/customer-login', [CustomerAuthController::class, 'login'])->name('customer.login');
+Route::post('/customer-register', [CustomerAuthController::class, 'register'])->name('customer.register');
+
+Route::middleware(['customer'])->group(function(){
+    Route::get('/customer-dashboard', [CustomerAuthController::class, 'dashboard'])->name('customer.dashboard');
+    Route::get('/customer-profile', [CustomerAuthController::class, 'profile'])->name('customer.profile');
+    Route::get('/customer-order', [CustomerOrderController::class, 'allOrder'])->name('customer.order');
+    Route::get('/customer-logout', [CustomerAuthController::class, 'logout'])->name('customer.logout');
+    Route::get('/customer-account', [CustomerAuthController::class, 'account'])->name('customer.account');
+    Route::get('/customer-password', [CustomerAuthController::class, 'password'])->name('customer.password');
+});
+
+
 
 
 
