@@ -27,6 +27,10 @@ Route::post('/add-to-cart/{id}', [CartController::class, 'index'])->name('add-to
 Route::get('/show-cart', [CartController::class, 'show'])->name('show-cart');
 Route::get('/remove-cart-product/{id}', [CartController::class, 'remove'])->name('remove-cart-product');
 Route::post('/update-cart-product/{id}', [CartController::class, 'update'])->name('update-cart-product');
+Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout');
+Route::get('/customer-email-check', [CheckoutController::class, 'checkCustomerEmail'])->name('customer-email-check');
+Route::post('/new-cash-order', [CheckoutController::class, 'newCashOrder'])->name('new-cash-order');
+Route::get('/complete-order', [CheckoutController::class, 'completeOrder'])->name('complete-order');
 
 
 
