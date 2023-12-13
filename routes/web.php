@@ -1,19 +1,8 @@
 <?php
 
-use App\Http\Controllers\AdminOrderController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\BrandController;
-use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoryController;
-use App\Http\Controllers\CheckoutController;
-use App\Http\Controllers\CustomerAuthController;
-use App\Http\Controllers\CustomerOrderController;
 use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\MyCommerceController;
-use App\Http\Controllers\ProductController;
-use App\Http\Controllers\SubCategoryController;
-use App\Http\Controllers\UnitController;
-use App\Http\Controllers\SslCommerzPaymentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,6 +20,15 @@ use App\Http\Controllers\SslCommerzPaymentController;
 // });
 
 
+Route::get('/', [MyCommerceController::class, 'index'])->name('home');
+Route::get('/product-category/{id}', [MyCommerceController::class, 'category'])->name('product-category');
+Route::get('/product-detail/{id}', [MyCommerceController::class, 'detail'])->name('product-detail');
+Route::post('/add-to-cart/{id}', [CartController::class, 'index'])->name('add-to-cart');
+Route::get('/show-cart', [CartController::class, 'show'])->name('show-cart');
+Route::get('/remove-cart-product/{id}', [CartController::class, 'remove'])->name('remove-cart-product');
+Route::post('/update-cart-product/{id}', [CartController::class, 'update'])->name('update-cart-product');
+
+
 
 Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
@@ -42,5 +40,4 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
     Route::get('/category/edit/{id}', [CategoryController::class, 'edit'])->name('category.edit');
     Route::post('/category/update/{id}', [CategoryController::class, 'update'])->name('category.update');
 });
-
 
